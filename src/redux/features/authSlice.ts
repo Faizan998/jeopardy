@@ -18,13 +18,11 @@ const initialState: AuthState = {
   error: null,
 };
 
-// Async thunks for authentication
+
 export const loginUser = createAsyncThunk(
   'auth/login',
   async ({ email, password }: { email: string; password: string }) => {
     try {
-      // Here you would make an actual API call
-      // For now, we'll simulate an API call
       const mockUser = {
         id: '1',
         email,
@@ -43,8 +41,7 @@ export const signupUser = createAsyncThunk(
   'auth/signup',
   async ({ email, password, username }: { email: string; password: string; username: string }) => {
     try {
-      // Here you would make an actual API call
-      // For now, we'll simulate an API call
+
       const mockUser = {
         id: '1',
         email,
@@ -67,7 +64,7 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
-// Check for stored user data
+
 export const checkAuth = createAsyncThunk(
   'auth/check',
   async () => {
@@ -88,7 +85,7 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // Login
+ 
     builder
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
@@ -103,7 +100,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.error.message || 'Failed to login';
       })
-      // Signup
+   
       .addCase(signupUser.pending, (state) => {
         state.isLoading = true;
         state.error = null;
@@ -117,12 +114,12 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.error.message || 'Failed to create account';
       })
-      // Logout
+    
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
         state.error = null;
       })
-      // Check Auth
+      
       .addCase(checkAuth.fulfilled, (state, action) => {
         state.user = action.payload;
       });

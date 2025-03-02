@@ -29,18 +29,13 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-black">
-      {/* Enhanced animated gradient background overlay with multiple layers */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-900/40 via-purple-900/30 to-indigo-900/40 animate-gradient" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(59,130,246,0.1)_0%,_transparent_50%)] animate-pulse-slow" />
-
-      {/* Animated shooting stars */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute w-1 h-1 bg-white rounded-full animate-shooting-star-1" style={{ top: '10%', left: '-10%' }} />
         <div className="absolute w-1 h-1 bg-white rounded-full animate-shooting-star-2" style={{ top: '40%', left: '-10%' }} />
         <div className="absolute w-1 h-1 bg-white rounded-full animate-shooting-star-3" style={{ top: '70%', left: '-10%' }} />
       </div>
-
-      {/* Full-screen background image with enhanced zoom and parallax effect */}
       <div className="absolute inset-0 w-full h-full animate-slow-zoom transform hover:scale-105 transition-transform duration-1000">
         <Image
           src="/jeopardy.jpg"
@@ -51,16 +46,15 @@ export default function Home() {
         />
       </div>
 
-      {/* Enhanced particle overlay with multiple layers */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.1)_0%,_transparent_2%)] bg-[length:3rem_3rem] animate-twinkle opacity-70" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.05)_0%,_transparent_1%)] bg-[length:2rem_2rem] animate-twinkle-reverse opacity-50" />
       </div>
 
-      {/* Content overlay with enhanced animations */}
+     
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-8 text-white">
         <div className="text-center max-w-2xl backdrop-blur-sm bg-black/10 p-8 rounded-2xl shadow-[0_0_15px_rgba(0,0,0,0.2)] hover:shadow-[0_0_35px_rgba(255,255,255,0.2)] transition-all duration-500 animate-float">
-          {/* Enhanced title with multiple gradients and animations */}
+         
           <div className="relative">
             <h1 className="text-6xl sm:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent drop-shadow-lg animate-gradient-x relative z-10">
               Welcome to Jeopardy Quiz Game
@@ -68,7 +62,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-blue-500/20 blur-xl animate-pulse-slow" />
           </div>
 
-          {/* Enhanced description with animated underline */}
+          
           <div className="relative group">
             <p className="text-xl text-gray-200 mb-12 leading-relaxed drop-shadow-lg animate-slide-up">
               Test your knowledge across various categories in this exciting Jeopardy-style quiz game. 
@@ -77,7 +71,7 @@ export default function Home() {
             <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 w-0 group-hover:w-full h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent transition-all duration-1000" />
           </div>
           
-          {/* Enhanced button container with floating animation */}
+          
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-float-delayed">
             {!user ? (
               <>

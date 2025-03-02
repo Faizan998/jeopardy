@@ -21,7 +21,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    // Check for stored user data on mount
+   
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
@@ -30,8 +30,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = async (email: string, password: string) => {
     try {
-      // Here you would typically make an API call to your backend
-      // For demo purposes, we'll simulate a successful login
+    
       const mockUser = {
         id: '1',
         email,
@@ -48,8 +47,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signup = async (email: string, password: string, username: string) => {
     try {
-      // Here you would typically make an API call to your backend
-      // For demo purposes, we'll simulate a successful signup
+      
       const mockUser = {
         id: '1',
         email,

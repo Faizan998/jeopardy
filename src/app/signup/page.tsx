@@ -30,7 +30,6 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-black">
-      {/* Background Image */}
       <div className="absolute inset-0 w-full h-full animate-slow-zoom">
         <Image
           src="/jeopardy.jpg"
@@ -41,13 +40,9 @@ export default function SignupPage() {
         />
       </div>
 
-      {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-900/40 to-purple-900/40 animate-gradient" />
-
-      {/* Content */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-4">
         <div className="w-full max-w-md space-y-8 backdrop-blur-sm bg-black/30 p-8 rounded-2xl shadow-[0_0_15px_rgba(0,0,0,0.2)] animate-fade-in">
-          {/* Title */}
           <div className="text-center">
             <h2 className="text-3xl font-bold text-white mb-2 bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
               Create Your Account
