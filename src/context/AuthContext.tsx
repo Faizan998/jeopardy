@@ -29,29 +29,39 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const login = async (email: string, password: string) => {
-    // Here you would typically make an API call to your backend
-    // For demo purposes, we'll simulate a successful login
-    const mockUser = {
-      id: '1',
-      email,
-      username: email.split('@')[0],
-    };
-    
-    setUser(mockUser);
-    localStorage.setItem('user', JSON.stringify(mockUser));
+    try {
+      // Here you would typically make an API call to your backend
+      // For demo purposes, we'll simulate a successful login
+      const mockUser = {
+        id: '1',
+        email,
+        username: email.split('@')[0],
+      };
+      
+      setUser(mockUser);
+      localStorage.setItem('user', JSON.stringify(mockUser));
+    } catch (error) {
+      console.error('Failed to login:', error);
+      throw error;
+    }
   };
 
   const signup = async (email: string, password: string, username: string) => {
-    // Here you would typically make an API call to your backend
-    // For demo purposes, we'll simulate a successful signup
-    const mockUser = {
-      id: '1',
-      email,
-      username,
-    };
-    
-    setUser(mockUser);
-    localStorage.setItem('user', JSON.stringify(mockUser));
+    try {
+      // Here you would typically make an API call to your backend
+      // For demo purposes, we'll simulate a successful signup
+      const mockUser = {
+        id: '1',
+        email,
+        username,
+      };
+      
+      setUser(mockUser);
+      localStorage.setItem('user', JSON.stringify(mockUser));
+    } catch (error) {
+      console.error('Failed to signup:', error);
+      throw error;
+    }
   };
 
   const logout = () => {
@@ -66,10 +76,3 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function useAuth() {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
-} 
