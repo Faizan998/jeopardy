@@ -1,101 +1,132 @@
+'use client';
+
 import Image from "next/image";
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/redux/store';
+import { loginUser, signupUser, checkAuth } from '@/redux/features/authSlice';
+import AuthModal from "@/components/AuthModal";
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
+  const { user, isLoading } = useSelector((state: RootState) => state.auth);
+
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, [dispatch]);
+
+  const handlePlayClick = () => {
+    if (user) {
+      router.push('/play');
+    } else {
+      setIsModalOpen(true);
+    }
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+    <div className="relative min-h-screen overflow-hidden bg-black">
+      {/* Enhanced animated gradient background overlay with multiple layers */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/40 via-purple-900/30 to-indigo-900/40 animate-gradient" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(59,130,246,0.1)_0%,_transparent_50%)] animate-pulse-slow" />
+
+      {/* Animated shooting stars */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute w-1 h-1 bg-white rounded-full animate-shooting-star-1" style={{ top: '10%', left: '-10%' }} />
+        <div className="absolute w-1 h-1 bg-white rounded-full animate-shooting-star-2" style={{ top: '40%', left: '-10%' }} />
+        <div className="absolute w-1 h-1 bg-white rounded-full animate-shooting-star-3" style={{ top: '70%', left: '-10%' }} />
+      </div>
+
+      {/* Full-screen background image with enhanced zoom and parallax effect */}
+      <div className="absolute inset-0 w-full h-full animate-slow-zoom transform hover:scale-105 transition-transform duration-1000">
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
+          src="/jeopardy.jpg"
+          alt="Jeopardy Game"
+          fill
+          className="object-cover brightness-40 transform scale-105 hover:scale-110 transition-all duration-1000"
           priority
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+      </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Enhanced particle overlay with multiple layers */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.1)_0%,_transparent_2%)] bg-[length:3rem_3rem] animate-twinkle opacity-70" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.05)_0%,_transparent_1%)] bg-[length:2rem_2rem] animate-twinkle-reverse opacity-50" />
+      </div>
+
+      {/* Content overlay with enhanced animations */}
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-8 text-white">
+        <div className="text-center max-w-2xl backdrop-blur-sm bg-black/10 p-8 rounded-2xl shadow-[0_0_15px_rgba(0,0,0,0.2)] hover:shadow-[0_0_35px_rgba(255,255,255,0.2)] transition-all duration-500 animate-float">
+          {/* Enhanced title with multiple gradients and animations */}
+          <div className="relative">
+            <h1 className="text-6xl sm:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent drop-shadow-lg animate-gradient-x relative z-10">
+              Welcome to Jeopardy Quiz Game
+            </h1>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-blue-500/20 blur-xl animate-pulse-slow" />
+          </div>
+
+          {/* Enhanced description with animated underline */}
+          <div className="relative group">
+            <p className="text-xl text-gray-200 mb-12 leading-relaxed drop-shadow-lg animate-slide-up">
+              Test your knowledge across various categories in this exciting Jeopardy-style quiz game. 
+              Challenge yourself, compete with friends, and become the ultimate quiz champion!
+            </p>
+            <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 w-0 group-hover:w-full h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent transition-all duration-1000" />
+          </div>
+          
+          {/* Enhanced button container with floating animation */}
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-float-delayed">
+            {!user ? (
+              <>
+                <Link 
+                  href="/login" 
+                  className="group relative px-8 py-4 bg-blue-600/80 text-white rounded-full hover:bg-blue-700 transition-all duration-300 backdrop-blur-sm hover:scale-110 hover:shadow-[0_0_30px_rgba(37,99,235,0.5)] overflow-hidden transform hover:-translate-y-1"
+                >
+                  <span className="relative z-10 font-semibold">Login</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600/0 via-blue-400/30 to-blue-600/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.2)_0%,_transparent_50%)]" />
+                </Link>
+                <Link 
+                  href="/signup" 
+                  className="group relative px-8 py-4 bg-purple-600/80 text-white rounded-full hover:bg-purple-700 transition-all duration-300 backdrop-blur-sm hover:scale-110 hover:shadow-[0_0_30px_rgba(147,51,234,0.5)] overflow-hidden transform hover:-translate-y-1"
+                >
+                  <span className="relative z-10 font-semibold">Sign Up</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600/0 via-purple-400/30 to-purple-600/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.2)_0%,_transparent_50%)]" />
+                </Link>
+              </>
+            ) : null}
+            <button 
+              onClick={handlePlayClick}
+              disabled={isLoading}
+              className="group relative px-10 py-4 bg-gradient-to-r from-blue-600/90 to-purple-600/90 text-white rounded-full transition-all duration-300 backdrop-blur-sm hover:scale-110 hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] font-semibold overflow-hidden animate-bounce-subtle disabled:opacity-50 transform hover:-translate-y-1"
+            >
+              <span className="relative z-10 flex items-center gap-2 font-bold">
+                {user ? "Continue Playing" : "Let's Play!"} 
+                <span className="transform group-hover:rotate-180 transition-transform duration-500 group-hover:scale-125">🎮</span>
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-white/20 to-purple-400/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.2)_0%,_transparent_50%)]" />
+            </button>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+
+      <AuthModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onLogin={async (email, password) => {
+          await dispatch(loginUser({ email, password })).unwrap();
+          router.push('/play');
+        }}
+        onSignup={async (email, password, username) => {
+          await dispatch(signupUser({ email, password, username })).unwrap();
+          router.push('/play');
+        }}
+      />
     </div>
   );
 }
